@@ -17,7 +17,7 @@ function Table(props) {
         </thead>
         <tbody>
           {employees.map(result => (
-            <tr key={result.id.id}>
+            <tr key={`${result.name.first} ${result.name.last} ${result.dob.date}`}>
               <td className="d-flex justify-content-center">
                 <img
                   alt={`${result.name.first} ${result.name.last}`}

@@ -22,7 +22,7 @@ class SearchResultContainer extends Component {
         results = res.data.results;
       })
       .catch((err) => console.log(err));
-    return results;
+      return results;
   };
 
   // randEmployees = async () => {
