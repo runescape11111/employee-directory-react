@@ -2,22 +2,10 @@ import React from "react";
 const moment = require("moment");
 
 function Table(props) {
-  // return (
-  //   <ul className="list-group">
-  //     {props.results.map((result) => (
-  //       <li className="list-group-item" key={result.id}>
-  //         <img
-  //           alt={result.title}
-  //           className="img-fluid"
-  //           src={result.images.original.url}
-  //         />
-  //       </li>
-  //     ))}
-  //   </ul>
-  // );
+  const employees = props.results;
+
   return (
-    <div className="table-responsive">
-      <table className="table table-striped table-bordered" id="sortTable">
+      <table className="table align-middle table-primary table-hover table-striped table-bordered" id="sortTable">
         <thead>
           <tr>
             <th>Image</th>
@@ -28,13 +16,13 @@ function Table(props) {
           </tr>
         </thead>
         <tbody>
-          {props.results.map(result => (
+          {employees.map(result => (
             <tr key={result.id.id}>
               <td className="d-flex justify-content-center">
                 <img
                   alt={`${result.name.first} ${result.name.last}`}
-                  // className="img-fluid"
-                  src={result.picture.medium}
+                  src={result.picture.large}
+                  className="rounded-circle"
                 />
               </td>
               <td>{result.name.first}</td>
@@ -45,7 +33,6 @@ function Table(props) {
           ))} 
         </tbody>
       </table>
-    </div>
   )
 }
 
