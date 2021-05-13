@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
-import ResultList from "./ResultList";
+import Table from "./ResultList";
 import Header from "./Header";
 import API from "../utils/API";
 
@@ -18,12 +18,14 @@ class SearchResultContainer extends Component {
     let results = [];
     for (let i=0;i<3;i++) {
       API.search()
-        // .then((res) => this.setState({ results: res.data.data }))
-        .then((res) => results.push(res.data.results[0]))
+        .then((res) => {
+          let random = res.data.results[0];
+          random.id.id = results.length;
+          results.push(random);
+        })
         .catch((err) => console.log(err));
     };
     await this.setState({results});
-    console.log(this.state.results);
   };
 
   handleInputChange = async (event) => {
@@ -32,7 +34,6 @@ class SearchResultContainer extends Component {
     await this.setState({
       [name]: value,
     });
-    console.log(this.state.search);
   };
 
   render() {
@@ -43,7 +44,7 @@ class SearchResultContainer extends Component {
           search={this.state.search}
           handleInputChange={this.handleInputChange}
         />
-        {/* <ResultList results={this.state.results} /> */}
+        <Table results={this.state.results} />
       </div>
     );
   }
