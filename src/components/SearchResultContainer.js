@@ -10,22 +10,29 @@ class SearchResultContainer extends Component {
     results: [],
   };
 
-  // componentDidMount() {
-  //   this.searchGiphy("kittens");
-  // }
+  componentDidMount() {
+    this.randEmployees();
+  }
 
-  searchGiphy = (query) => {
-    API.search(query)
-      .then((res) => this.setState({ results: res.data.data }))
-      .catch((err) => console.log(err));
+  randEmployees = async () => {
+    let results = [];
+    for (let i=0;i<3;i++) {
+      API.search()
+        // .then((res) => this.setState({ results: res.data.data }))
+        .then((res) => results.push(res.data.results[0]))
+        .catch((err) => console.log(err));
+    };
+    await this.setState({results});
+    console.log(this.state.results);
   };
 
-  handleInputChange = (event) => {
+  handleInputChange = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
+    await this.setState({
       [name]: value,
     });
+    console.log(this.state.search);
   };
 
   render() {
@@ -36,7 +43,7 @@ class SearchResultContainer extends Component {
           search={this.state.search}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.results} />
+        {/* <ResultList results={this.state.results} /> */}
       </div>
     );
   }
