@@ -29,7 +29,10 @@ class SearchResultContainer extends Component {
   handleInputChange = async (event) => {
     const value = event.target.value;
     const employees = await this.state.results.filter(employee => 
-      employee.name.first.includes(value) || employee.name.last.includes(value) || employee.email.includes(value) || employee.dob.date.includes(value)
+      employee.name.first.toLowerCase().includes(value.toLowerCase()) 
+      || employee.name.last.toLowerCase().includes(value.toLowerCase()) 
+      || employee.email.toLowerCase().includes(value.toLowerCase()) 
+      || employee.dob.date.includes(value.toLowerCase())
       );
     await this.setState({
       search: value,
