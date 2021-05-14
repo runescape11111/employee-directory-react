@@ -36,6 +36,15 @@ class SearchResultContainer extends Component {
   handleSort = async (event) => {
     const column = event.target.getAttribute("data-name");
     console.log(column);
+    const sorted = await this.state.employees.sort((a,b) => {
+      if (a[column] > b[column]) {
+        return 1;
+      } else if (a[column] < b[column]) {
+        return -1;
+      }
+      return 0;
+    });
+    this.setState({employees: sorted});
   };
 
   handleInputChange = async (event) => {
