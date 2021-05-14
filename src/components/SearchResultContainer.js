@@ -8,11 +8,12 @@ class SearchResultContainer extends Component {
   state = {
     search: "",
     results: [],
+    employees: [],
   };
 
   componentDidMount = async () => {
     const results = await this.randEmployees();
-    await this.setState({results});
+    await this.setState({results, employees:results});
   }
 
   randEmployees = async () => {
@@ -25,30 +26,12 @@ class SearchResultContainer extends Component {
       return results;
   };
 
-  // randEmployees = async () => {
-  //   try {
-  //     let requests = [];
-  //     for (let i=0;i<3;i++) {
-  //       requests.push( API.search()
-  //       .then((res) => {
-  //         let random = res.data.results[0];
-  //         random.id.id = requests.length;
-  //         return random;
-  //       }))
-  //     };
-  //     const results = await Promise.all(requests);
-  //     return results;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return [];
-  //   }
-  // };
-
   handleInputChange = async (event) => {
-    const name = event.target.name;
     const value = event.target.value;
+    const employees = await this.state.results.filter(employee => employee.name.first.includes(value));
     await this.setState({
-      [name]: value,
+      search: value,
+      employees
     });
   };
 
@@ -61,7 +44,7 @@ class SearchResultContainer extends Component {
           handleInputChange={this.handleInputChange}
         />
         <Table 
-          results={this.state.results}
+          results={this.state.employees}
         />
       </div>
     );
