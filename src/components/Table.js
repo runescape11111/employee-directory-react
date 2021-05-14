@@ -1,18 +1,17 @@
 import React from "react";
-// import { MDBDataTable } from 'mdbreact';
 const moment = require("moment");
 
 function Table(props) {
   const employees = props.results;
   return (
-      <table className="table align-middle table-primary table-hover table-striped table-bordered" id="sortTable">
+      <table className="table align-middle table-primary table-hover table-striped table-bordered">
         <thead>
           <tr>
             <th>Image</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>DOB</th>
+            <th data-name="first" onClick={props.handleSort}>First Name</th>
+            <th data-name="last" onClick={props.handleSort}>Last Name</th>
+            <th data-name="email" onClick={props.handleSort}>Email</th>
+            <th data-name="dob" onClick={props.handleSort}>DOB</th>
           </tr>
         </thead>
         <tbody>

@@ -33,12 +33,17 @@ class SearchResultContainer extends Component {
       return results;
   };
 
+  handleSort = async (event) => {
+    const column = event.target.getAttribute("data-name");
+    console.log(column);
+  };
+
   handleInputChange = async (event) => {
     const value = event.target.value;
     const employees = await this.state.results.filter(employee => 
       employee.first.toLowerCase().includes(value.toLowerCase()) 
       || employee.last.toLowerCase().includes(value.toLowerCase()) 
-      || employee.toLowerCase().includes(value.toLowerCase()) 
+      || employee.email.toLowerCase().includes(value.toLowerCase()) 
       || employee.date.includes(value.toLowerCase())
       );
     await this.setState({
@@ -57,6 +62,7 @@ class SearchResultContainer extends Component {
         />
         <Table 
           results={this.state.employees}
+          handleSort = {this.handleSort}
         />
       </div>
     );
