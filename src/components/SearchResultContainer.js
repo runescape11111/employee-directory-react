@@ -28,7 +28,9 @@ class SearchResultContainer extends Component {
 
   handleInputChange = async (event) => {
     const value = event.target.value;
-    const employees = await this.state.results.filter(employee => employee.name.first.includes(value));
+    const employees = await this.state.results.filter(employee => 
+      employee.name.first.includes(value) || employee.name.last.includes(value) || employee.email.includes(value) || employee.dob.date.includes(value)
+      );
     await this.setState({
       search: value,
       employees
