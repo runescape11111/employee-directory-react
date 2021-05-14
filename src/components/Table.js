@@ -11,7 +11,7 @@ function Table(props) {
             <th data-name="first" onClick={props.handleSort}>First Name</th>
             <th data-name="last" onClick={props.handleSort}>Last Name</th>
             <th data-name="email" onClick={props.handleSort}>Email</th>
-            <th data-name="dob" onClick={props.handleSort}>DOB</th>
+            <th>DOB</th>
           </tr>
         </thead>
         <tbody>

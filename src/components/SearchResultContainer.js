@@ -9,6 +9,9 @@ class SearchResultContainer extends Component {
     search: "",
     results: [],
     employees: [],
+    first: 1,
+    last: 1,
+    email: 1
   };
 
   componentDidMount = async () => {
@@ -35,16 +38,17 @@ class SearchResultContainer extends Component {
 
   handleSort = async (event) => {
     const column = event.target.getAttribute("data-name");
-    console.log(column);
-    const sorted = await this.state.employees.sort((a,b) => {
+    let sorted = this.state.employees.map(e => e);
+    sorted.sort((a,b) => {
       if (a[column] > b[column]) {
-        return 1;
+        return 1 * this.state[column];
       } else if (a[column] < b[column]) {
-        return -1;
+        return -1 * this.state[column];
       }
       return 0;
     });
-    this.setState({employees: sorted});
+                         
+    this.setState({employees: sorted, [column]: this.state[column]*(-1)});
   };
 
   handleInputChange = async (event) => {
@@ -53,7 +57,6 @@ class SearchResultContainer extends Component {
       employee.first.toLowerCase().includes(value.toLowerCase()) 
       || employee.last.toLowerCase().includes(value.toLowerCase()) 
       || employee.email.toLowerCase().includes(value.toLowerCase()) 
-      || employee.date.includes(value.toLowerCase())
       );
     await this.setState({
       search: value,
